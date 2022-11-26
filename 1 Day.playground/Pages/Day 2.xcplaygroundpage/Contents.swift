@@ -10,3 +10,6 @@ struct School {
     }
 }
 
+School.studentCount = 150
+School.addStudent(newStudent: "Shubham Kashyap")
+School.studentCount
