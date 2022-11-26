@@ -1,4 +1,5 @@
 import Cocoa
+import Foundation
 
 // MARK: - String
 
@@ -261,3 +262,353 @@ let secondNumber = 7
 
 let newNames = ["Shubham", "Khushboo", "Jany"]
 let crewCount = newNames.isEmpty ? "No one" : "\(newNames.count) people"
+
+
+// MARK: - For Loop
+let os = ["iOS", "macOS", "watchOS", "tvOS", "driverOS", "rOS"]
+
+for os in os {
+    print("This is great Apple os : \(os)")
+}
+
+// MARK: - While Loop
+var countDown = 10
+
+while countDown > 0 {
+    print(countDown)
+    countDown -= 1
+}
+
+print("Rocket goes burr")
+
+let id = Int.random(in: 1...1000)
+let amount = Double.random(in: 0...1)
+
+var roll = 0
+while roll != 20 {
+    roll = Int.random(in: 1...20)
+    print("I rolled a : \(roll)")
+}
+
+print("Critical Hit")
+
+// MARK: - Continue Keyword - Skips the item if condition is met
+for i in 1...25 {
+    if i % 5 == 0 {
+        continue
+    }
+    print("Values here I::: \(i)")
+}
+
+// MARK: - Break Keywork - Exit the loop immediatly if condition is met
+
+for i in 1...25 {
+    if i % 5 == 0 {
+        break
+    }
+    print("Values here J::: \(i)")
+}
+
+func commonMultiples(number1: Int, number2: Int) -> [Int] {
+    var multiples: [Int] = []
+    
+    for i in 1...100_000 {
+        if i.isMultiple(of: number1) && i.isMultiple(of: number2) {
+            multiples.append(i)
+            
+            if multiples.count == 10 {
+                break
+            }
+        }
+    }
+    return multiples
+}
+
+print(commonMultiples(number1: 2, number2: 7))
+
+// MARK: - FizzBuzz Question
+
+func fizzBuzzFunc(){
+    for i in 1...100 {
+        if (i % 3) == 0 && (i % 5) == 0 { print("FizzBuzz") }
+        else if (i % 3) == 0 { print("Fizz") }
+        else if (i % 5) == 0 { print("Buzz") }
+        else { print(i) }
+    }
+}
+
+fizzBuzzFunc()
+
+func fibnociSeriesFunc() {
+    
+}
+
+// MARK: - Sqr Function
+func rollDice(numb: Int) -> Int {
+    return Int.random(in: 1...numb)
+}
+
+let result = rollDice(numb: 6)
+
+// Do two strings contain same characters regardless of order
+func twoStringOrderFunc(str1: String, str2: String) -> Bool {
+//    for char in str1 {
+//        for char2 in str2 {
+//            if char == char2 {
+//                return true
+//            }
+//        }
+//    }
+//
+//    return false
+    
+    return str1.lowercased().sorted() == str2.lowercased().sorted()
+}
+
+twoStringOrderFunc(str1: "Hello", str2: "hello")
+
+// MARK: - Return multiple values from function Using TUPLES
+func getUser() -> [String] {
+    return [""]
+}
+
+// Using Tuples in return values
+func getUser3() -> (String, String) {
+    return ("Shubham", "Kashyap")
+}
+
+let (a,b) = getUser3() // Destructing
+print("\(a) \(b)")
+
+
+// MARK: - Customise Parameter Labels
+let myName = "Khushboo Verma"
+myName.hasPrefix("Khu")
+
+func tellMeName(name a : String = "yo") {
+    print(a)
+}
+
+tellMeName(name: "Khushboo Verma")
+
+// MARK: - Error Handling for Swift
+enum PasswordError: Error {
+    case short, obvious
+}
+
+func checkPassword(_ password: String) throws -> String {
+    if password.count < 5 { throw PasswordError.short }
+    if password == "password" { throw PasswordError.obvious}
+    
+    if password.count < 8 {
+        return "OK"
+    }
+    else if password.count < 10 {
+        return "Good"
+    }
+    else {
+        return "Excellent"
+    }
+}
+
+// Do Try Keyword
+do {
+    try checkPassword("1234")
+}
+catch PasswordError.obvious {
+    print("Nopes")
+}
+catch {
+    print("printing :: \(error)")
+}
+
+enum CustomErrorType : Error {
+    case outOfBounds
+}
+
+// MARK: - Checkpoint 4 -- Challenge -- Creating Custom Sqrt Function
+func sqrtCalculatorFunc(numb1: Int) throws -> Int? {
+    
+    // Sqrt Code Here
+    if numb1 >= 1 && numb1 <= 25000 {
+        for i in 1...500 {
+            if i * i == numb1 {
+                return i
+            }
+        }
+    }
+    else {
+        throw CustomErrorType.outOfBounds
+    }
+    return nil
+}
+
+do {
+    let result = try sqrtCalculatorFunc(numb1: 22_500)
+    print(result ?? "No root found")
+    
+}
+catch CustomErrorType.outOfBounds {
+    print("Out of Bounds Error")
+}
+
+// MARK: - Closure - Very Important
+func greetUser() {
+    print("Congo")
+}
+
+greetUser()
+var greetCopy: () -> Void = greetUser
+greetCopy()
+
+
+// Closure
+let newFuncHere = {
+    print("Happy Birthday to you !!")
+}
+
+newFuncHere()
+
+// Closure with parameter
+let closureWithParameters = { (name: String) -> String in // in marks the end of paramters and return type and starts the body of closure
+    return ("Hi my name is \(name)")
+}
+
+closureWithParameters("Shubham Kashyap")
+
+//
+let team = ["Shubham", "Kashyap", "Bruce", "Campbell"]
+let sortedTeam = team.sorted()
+
+func firstSorted(n1: String, n2: String) -> Bool { // Custom Sorted Algo
+    if n1 == "Shubham" {
+        return true
+    }
+    else if n2 == "Shubham" {
+        return false
+    }
+    
+    return n1 < n2
+}
+
+//let newSort = team.sorted(by: firstSorted) // Using Func
+
+let latestSort = team.sorted { (n1, n2) in // Using Closure
+    if n1 == "Shubham" {
+        return true
+    }
+    else if n2 == "Shubham" {
+        return false
+    }
+    
+    return n1 < n2
+}
+
+let superLatestSort = team.sorted {   // Using Closure // Using High order syntax
+    if $0 == "Shubham" {
+        return true
+    }
+    else if $1 == "Shubham" {
+        return false
+    }
+    
+    return $0 < $1 // Ascending Order
+//    return $0 > $1 // Descending Order
+}
+
+
+// MARK: - More Closure - High Order Functions
+// .filter - Lets us run some code on every item of array (like using for loop on array) and send backs new array that meets our condition
+var superHeroes = ["Batman", "Flash", "Bruce", "Superman", "Spiderman"]
+
+let bOnly = superHeroes.filter { $0.hasPrefix("B") }
+bOnly
+
+// .map -- transform everyItem of array with custom Logic and make new arrays that meets our condition
+var appendCustomLetters = superHeroes.map { $0.uppercased() }
+appendCustomLetters
+
+superHeroes.reduce("Wolverine") {
+    $0 + $1
+}
+
+
+// MARK: - Accept Functions as parameters
+func makeArray(size: Int, using generator : () -> Int) -> [Int] {
+    var numbers = [Int]()
+    
+    for _ in 0..<size {
+        let newNumber = generator()
+        numbers.append(newNumber)
+    }
+    
+    return numbers
+}
+
+let generated = makeArray(size: 15) {
+    Int.random(in: 0...75)
+}
+
+
+func doImportantWork(first: () -> Void, second: () -> Void, third: () -> Void) {
+    print("About to me")
+    first()
+    print("About to me not")
+    second()
+    print("About to me not here")
+    third()
+    print("About to me not here done")
+}
+
+doImportantWork {
+    print("11")
+} second: {
+    print("22")
+} third: {
+    print("33")
+}
+
+// MARK: - Closure - Checkpoint - 5
+let luckyNumbers = [7,4,38,21,16,15,12,33,31,49]
+
+func printLuckyNumbers(luckyNumbers: [Int]) {
+
+    let filteredLuckyNumberArray = luckyNumbers.filter {
+        $0 % 2 != 0
+    }
+
+    let sortedLuckyNumberArray = filteredLuckyNumberArray.sorted {
+        $0 < $1
+    }
+
+    let mappedLuckyNumberArray = sortedLuckyNumberArray.map {
+        "\($0) is lucky number"
+    }
+
+    for i in mappedLuckyNumberArray {
+        print(i)
+    }
+}
+
+printLuckyNumbers(luckyNumbers: luckyNumbers)
+
+func printLuckyNumberUpdated(luckyNumbers: [Int]) {
+
+    let filteredLuckyNumberArray = luckyNumbers.filter {
+        $0 % 2 != 0
+    }.sorted {
+        $0 < $1
+    }.map {
+        "\($0) is lucky number"
+    }
+
+    for i in filteredLuckyNumberArray {
+        print("\(i)\n")
+    }
+
+}
+
+printLuckyNumberUpdated(luckyNumbers: luckyNumbers)
+
+// MARK: - Structures - Swift
+
