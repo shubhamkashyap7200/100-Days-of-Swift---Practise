@@ -727,8 +727,6 @@ accountHolder.deposit(amountToBeDeposited: 250)
 accountHolder.withdraw(amount: 100)
 accountHolder.funds
 
-// MARK: - Static properties and methods
-
 
 
 
