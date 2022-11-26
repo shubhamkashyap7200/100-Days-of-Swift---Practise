@@ -648,4 +648,39 @@ employeeOne.vacationRemaining = 4
 employeeOne.vacationAllocated
 
 // MARK: - Property Observers - Very Important
+// didSet
+// willSet
+
+struct Game {
+    var score = 0 {
+        didSet {
+            print("Score is now \(score) \(oldValue)")
+        }
+    }
+}
+
+var game = Game()
+game.score += 10
+game.score -= 3
+game.score += 1
+
+
+// App
+print("\n\n\n\n")
+struct App {
+    var contacts =  [String]() { // dont put too much calculations on computed properties
+        willSet { // less common
+            print("Current Value is \(contacts) :::: New Value is \(newValue)")
+        }
+        
+        didSet { // Is used more commonly
+            print("There are now \(contacts.count) contacts :::: Old Value is \(oldValue)")
+        }
+    }
+}
+
+var app = App()
+app.contacts.append("Rohit Sharma")
+app.contacts.append("Shubham Kashyap")
+app.contacts.append("Mr. Dhoni")
 
