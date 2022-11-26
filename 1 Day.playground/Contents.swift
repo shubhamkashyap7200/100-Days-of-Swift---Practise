@@ -684,3 +684,52 @@ app.contacts.append("Rohit Sharma")
 app.contacts.append("Shubham Kashyap")
 app.contacts.append("Mr. Dhoni")
 
+// MARK: - Custom Init Func
+
+struct Player {
+    var name: String
+    var number: Int
+    
+    // Custom Initializer
+    init(name: String) { // no func keyword // no return type
+        self.name = name
+        self.number = Int.random(in: 1...99)
+    }
+}
+
+let newPlayer = Player(name: "Shubham Kashyap")
+newPlayer.number
+
+// MARK: - Limit Access Control
+struct BankAccount {
+    private(set) var funds = 0 // using private shadows the variable and can't be accessed outside from struct
+    
+    // private(set) only read allowed but not write from outside
+    
+    mutating func deposit(amountToBeDeposited: Int) {
+        funds += amountToBeDeposited
+    }
+    
+    mutating func withdraw(amount: Int) -> Bool {
+        if funds > amount {
+            funds -= amount
+            return true
+        }
+        else {
+            return false
+        }
+    }
+}
+
+
+var accountHolder = BankAccount()
+accountHolder.deposit(amountToBeDeposited: 250)
+accountHolder.withdraw(amount: 100)
+accountHolder.funds
+
+// MARK: - Static properties and methods
+
+
+
+
+
