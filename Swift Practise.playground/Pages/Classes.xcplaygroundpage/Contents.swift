@@ -8,7 +8,7 @@ import Foundation
 // Reference Type - Copy data refer to same point
 // Do not have memberwise init func because of inheritence - As If class inherit multi other classes it will become night of dependency of init parameters
 // are generally slow because they stored in heaps in memory
-// deinit should always used
+// deinit can be used
 // Very important for SwiftUI
 
 class Game {
@@ -110,3 +110,68 @@ class Car: Vehicle {
 }
 
 let teslaY = Car(isElectric: true, isConvertible: true)
+
+
+// MARK: - Copy Classes
+// Classes are reference type
+
+class User {
+    var username = "Hidden"
+    
+    func copy() -> User {
+        let user = User()
+        user.username = username
+        return user
+    }
+}
+
+var user1 = User()
+var user2 = user1 // Will change orignal reference
+//var user2 = user1.copy() // Will not change original reference
+user2.username = "Johnny"
+
+user1.username
+user2.username
+
+// MARK: - Deinit - Is optional but important
+print("\n\n\n\n")
+//struct University { // Structures dont have deinit because you cant copy them
+//    let name : String
+//
+//    init() {
+//        print("Hey")
+//    }
+//
+//    deinit {
+//        print("Bye")
+//    }
+//}
+
+class NewUser {
+    let id: Int
+    
+    init(id: Int) {
+        self.id = id
+        print("User \(id) :: I am now well")
+    }
+    
+    deinit { // Is called when last remaining reference is detroyed from memory
+        print("User \(id) :: I am now gone")
+    }
+}
+
+for i in 1...3 {
+    let user = NewUser(id: i)
+    print("\(user.id)")
+}
+
+// MARK: - Variables in Classes
+class CoolUser {
+    var name = "Shubham"
+}
+    
+let user = CoolUser()
+user.name = "Kashyap"
+
+//user = CoolUser()
+//user.name
