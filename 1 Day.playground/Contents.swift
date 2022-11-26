@@ -611,4 +611,41 @@ func printLuckyNumberUpdated(luckyNumbers: [Int]) {
 printLuckyNumberUpdated(luckyNumbers: luckyNumbers)
 
 // MARK: - Structures - Swift
+struct Album {
+    let title: String
+    let artist: String
+    let year: Int
+    
+    func printSummary() {
+        print("Title: \(title)\nArtist: \(artist)\nYear: \(year)")
+    }
+}
+
+let album1 = Album(title: "Red", artist: "Taylor Swift", year: 2012)
+album1.printSummary()
+
+// MARK: - Computed Property - Important
+
+struct Employee {
+    var name :String
+    var vacationAllocated = 14
+    var vacationTaken = 0
+    
+    var vacationRemaining: Int {
+        get {
+            return vacationAllocated - vacationTaken
+        }
+        
+        set {
+            vacationAllocated = vacationTaken + newValue
+        }
+    }
+}
+
+var employeeOne = Employee(name: "Shubham Kashyap", vacationAllocated: 14)
+employeeOne.vacationTaken += 6
+employeeOne.vacationRemaining = 4
+employeeOne.vacationAllocated
+
+// MARK: - Property Observers - Very Important
 
