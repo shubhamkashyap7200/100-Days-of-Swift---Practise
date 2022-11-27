@@ -21,4 +21,4 @@ func simpleRandomGenerator(inputArray: [Int]?) -> Int {
     return inputArray?.randomElement()  ?? Int.random(in: 0...100)
 }
 
-//simpleRandomGenerator(inputArray: [])
+simpleRandomGenerator(inputArray: inputArray)
