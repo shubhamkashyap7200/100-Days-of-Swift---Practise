@@ -7,5 +7,6 @@
         <page name='Classes'/>
         <page name='Checkpoint - 7 - Classes'/>
         <page name='Protocol'/>
+        <page name='Opaque Return Type'/>
     </pages>
 </playground>
